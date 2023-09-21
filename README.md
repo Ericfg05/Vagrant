@@ -46,8 +46,8 @@ Criação das VMs:
 	Abra o arquivo Vagrantfile, no VisualStudio Code ou em um editor de texto e assim iremos inicializar as criações das máquinas virtuais
 Primeiramente utilize o comando : Vagrant.configure("2") do |config| config.vm.box = "gusztavvargadr/ubuntu-server" ,para criar assim criar todas 3 Vms com o mesmo sistema Operacional, com a mesma imagem. Para criar a primeira maquinas virtual comece com config.vm.define "vm1" do |vm1|, ou seja, você deu um apelido para a primeira máquina, e através do apelido que você conseguirá configurar a máquina. Em seguida, criaremos o IP privado, para isso utilize o comando: vm1.vm.network "private_network", ip: "192.168.56.10", assim definimos o ip dessa máquina, pode ser criado também uma porta de acesso utilize o seguinte comando vm1.vm.network "forwarded_port", guest: 80, host: 8000. Devemos criar uma pasta compartilhada de seu computador para o sua máquina virtual, para isso utilize o comando vm1.vm.synced_folder "/var/www/html", "/var/www/html", e por fim para a instalação do apache utilize e vincular ao gateway de outra vm3 o comando:   vm1.vm.provision "shell", inline: <<-SHELL
 run: "always",
-inline: "ip route del default via 192.168.56.12 || true"
 
+inline: "ip route del default via 192.168.56.12 || true"
   apt-get update
   apt-get install -y apache2
   
